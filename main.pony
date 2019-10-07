@@ -7,8 +7,9 @@ actor Main
     try
       let server = env.args(1)?
       let port   = env.args(2)?
+
       env.out.print(server)
-      TCPConnection(env.root as AmbientAuth, IRCChatConnectionNotify("redonapony"), server, port)
+      TCPConnection(env.root as AmbientAuth, IRCChatConnectionNotify("redonapony", env), server, port)
     else
-      env.err.print("I was unable to make a connection...")
+      env.err.print("Usage: ./irc_on_a_pony servername port")
     end
