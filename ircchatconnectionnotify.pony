@@ -11,7 +11,7 @@ class IRCChatConnectionNotify is TCPConnectionNotify
     _reader = Reader
 
   fun ref connected(conn: TCPConnection ref) =>
-    conn.write("NICK _nick\r\n")
+    conn.write("NICK " + _nick + "\r\n")
     conn.write("USER red 0 * :red\r\n")
 
   fun ref connect_failed(conn: TCPConnection ref) =>
@@ -40,10 +40,10 @@ class IRCChatConnectionNotify is TCPConnectionNotify
     true
 
     fun ref _process_message(line: String, conn: TCPConnection ref) =>
+      Debug("> " + line)
       if line.contains("PING :") then
         _process_ping(line, conn)
       end
-      Debug("> " + line)
       
 
 
